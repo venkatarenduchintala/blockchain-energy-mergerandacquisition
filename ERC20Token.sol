@@ -25,6 +25,7 @@ contract Token {
     
 }
 
+
 contract StandardToken is Token {
 
     function transfer(address _to, uint256 _value) public returns (bool success) {
@@ -42,7 +43,7 @@ contract StandardToken is Token {
     function transferFrom(address _from, address _to, uint256 _value) public returns (bool success) {
        
         // Allow token staking 
-        //if (balances[_from] >= _value && allowed[_from][msg.sender] >= _value && balances[_to] + _value > balances[_to]) {
+        //if (balances[_from] >= _value && allowed[_from][msg.sender] >= _value && balances[_to] + _value > balances[_to] {
        
         // Do not allow token staking 
 
@@ -76,17 +77,8 @@ contract StandardToken is Token {
 
 // ERC20 token definition
     
-    contract ERC20Token is StandardToken {
 
-        function () public {
-        throw;
-        }
-// Define local varribale 
-
-    string public name;
-    uint8 public decimals;
-    string public symbol;
-    
+contract ERC20Token is StandardToken {
 // CHANGE THESE VALUES FOR YOUR TOKEN
 
     function ERC20Token () {
@@ -96,6 +88,16 @@ contract StandardToken is Token {
         decimals = 0;                            
         symbol = "EDT";                               
     }
+
+    function () public {
+        throw;
+    }
+// Define local varribale 
+
+    string public name;
+    uint8 public decimals;
+    string public symbol;
+    
 
     // Contract approval and assignmnet for token economics
 
