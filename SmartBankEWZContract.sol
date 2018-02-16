@@ -1,24 +1,27 @@
 pragma solidity ^0.4.19;
 
-contract BankContract {
-    
+contract ContractBankEWZ {
+   
+    /* This creates an array with all balances */
     mapping (address => uint256) public balanceOf;
     
     address public owner = msg.sender;
-    
-    function Token() public {
-        balanceOf[msg.sender] = 1000;
+
+    /* Initializes contract with initial supply tokens to the creator of the contract */
+    function  MyToken (
+        uint256 initialSupply
+        ) 
+    {
+        balanceOf[msg.sender] = initialSupply;              // Give the creator all initial tokens
     }
     
-    function giveTokens() payable public {
-        owner.transfer(msg.value);
-        balanceOf[msg.sender] -= msg.value;
-    }
-    
-    function transfer(address to, uint256 amount) public {
-        require(balanceOf[msg.sender] >= amount);
-        balanceOf[msg.sender] -= amount;
-        balanceOf[to] += amount;
+
+    /* Send stuff */
+    function transfer(address _to, uint256 _value)  {
+        require(balanceOf[msg.sender] >= _value);           // Check if the sender has enough
+        require(balanceOf[_to] + _value >= balanceOf[_to]); // Check for overflows
+        balanceOf[msg.sender] -= _value;                    // Subtract from the sender
+        balanceOf[_to] += _value;                           // Add the same to the recipient
     }
     
 }
